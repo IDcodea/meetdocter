@@ -16,12 +16,14 @@ return new class extends Migration
     {
         Schema::create('detail_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('type_user_id');
+            $table->foreignId('user_id')->nullable()
+                ->index('fk_role_user_to_role');
+            $table->foreignId('type_user_id')->nullable()
+                ->index('fk_role_user_to_users');
             $table->string('contact')->nullable();
             $table->longText('adress')->nullable();
             $table->longText('photo')->nullable();
-            $table->enum('gender',[1,2])->nullable();
+            $table->enum('gender', [1, 2])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
